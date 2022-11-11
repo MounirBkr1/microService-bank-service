@@ -1,13 +1,16 @@
 package com.mnr.ebankservice.web;
 
 
+import com.mnr.ebankservice.dto.BankAccountRequestDTO;
+import com.mnr.ebankservice.dto.BankAccountResponseDTO;
 import com.mnr.ebankservice.entities.BankAccount;
+import com.mnr.ebankservice.mappers.AccountMapper;
 import com.mnr.ebankservice.repositories.BankAccountRepository;
+import com.mnr.ebankservice.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 
@@ -16,9 +19,15 @@ public class AccountRestController {
 
     private BankAccountRepository bankAccountRepository;
 
+    private AccountService accountService;
 
-    public AccountRestController(BankAccountRepository bankAccountRepository) {
+    private AccountMapper accountMapper;
+
+
+    public AccountRestController(BankAccountRepository bankAccountRepository, AccountService accountService, AccountMapper accountMapper) {
         this.bankAccountRepository = bankAccountRepository;
+        this.accountService = accountService;
+        this.accountMapper = accountMapper;
     }
 
     @GetMapping("/bankAccounts")
@@ -36,9 +45,8 @@ public class AccountRestController {
 
     //add: @RequestBody : objet sent via body
     @PostMapping("/bankAccounts")
-    public  BankAccount saveAccount(@RequestBody BankAccount bankAccount){
-        if(bankAccount.getId()==null) bankAccount.setId(UUID.randomUUID().toString());
-        return  bankAccountRepository.save(bankAccount);
+    public BankAccountResponseDTO saveAccount(@RequestBody BankAccountRequestDTO bankAccountRequestDTO){
+        return  accountService.addAccount(bankAccountRequestDTO);
     }
 
     //put(update all attributes) & patch (update some attributes)

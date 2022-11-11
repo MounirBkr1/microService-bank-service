@@ -1,29 +1,22 @@
-package com.mnr.ebankservice.entities;
+package com.mnr.ebankservice.dto;
 
 import com.mnr.ebankservice.entities.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+
+//qdj enregistre un compte, j envoie la reponse
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BankAccount {
-    @Id
+public class BankAccountResponseDTO {
     private String id;
     private Date createdAt;
-    //double: default value= 0, Double: default value= null
     private Double balance;
     private String currency;
-
-    @Enumerated(EnumType.STRING)
-    private  AccountType type;
-
-
+    private AccountType type;
 }
