@@ -19,6 +19,7 @@ public class BankAccountRequestDTO {
     private Double balance;
     private String currency;
 
+    //@Enumerated: pr ecrire type en string et pas en index(1,2,3..)
     @Enumerated(EnumType.STRING)
     private AccountType type;
 }

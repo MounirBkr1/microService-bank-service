@@ -1,0 +1,97 @@
+#on specifie les requetes a utiliser
+type Query{
+    #[] => list BankAccount
+#    query{
+#        accountsList{
+#            id
+#        }
+#    }
+    accountsList: [BankAccount],
+
+    #with argument ->use @Argument in code
+#    query{
+#        bankAccountById(id: "191eb22fc-be01-4507-bbd2-e392af15639d") {
+#            type
+#            balance
+#        }
+#    }
+    bankAccountById(id:String):BankAccount
+
+#    query{
+#        customers{
+#            id,name,bankAccountList{balance}
+#        }
+#    }
+    customers:[Customer]
+}
+
+#to midify an object == post on spring rest
+type Mutation{
+#    mutation{
+#        addAccount(bankAccount:{
+#            type:"SAVING_ACCOUNT",
+#            currency:"YAN",
+#            balance:5212.21
+#        }){
+#            id,type,balance
+#        }
+#    }
+#    or
+#    mutation($t:String,$c:String,$b:Float){
+#        addAccount(bankAccount:{
+#            type:$t,
+#            currency:$c,
+#            balance:$b
+#        }){
+#            id,type,balance
+#        }
+#    }
+    addAccount(bankAccount:BankAccountDTO):BankAccount
+
+#    mutation($id:String,$t:String,$c:String,$b:Float){
+#
+#        updateAccount(
+#            id:$id,
+#            bankAccount:{
+#                type:$t,
+#                currency:$c,
+#                balance:$b
+#            }
+#
+#        ){
+#            id,type,balance
+#        }
+#    }
+    updateAccount(id:String , bankAccount:BankAccountDTO):BankAccount
+
+#    mutation{
+#        deleteAccount(id:"c0fef286-c71a-43b8-b4e7-11d04a4a4a20")
+#    }
+    deleteAccount(id:String): Boolean
+}
+
+input BankAccountDTO {
+    balance : Float,
+    currency : String,
+    type : String
+}
+
+
+type Customer{
+    id:ID
+    name:String
+    bankAccountList:[BankAccount]
+}
+
+type BankAccount {
+    id : String,
+    #ya pas de type date, donc on utilise float ou double ou string
+    createdAt : Float,
+    balance : Float,
+    currency : String,
+    type : String,
+    customer:Customer
+
+}
+
+

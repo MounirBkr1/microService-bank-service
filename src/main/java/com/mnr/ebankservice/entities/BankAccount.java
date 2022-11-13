@@ -26,4 +26,8 @@ public class BankAccount {
     private  AccountType type;
 
 
+    @ManyToOne
+    private Customer customer;
+
+
 }

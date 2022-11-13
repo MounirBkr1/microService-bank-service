@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 
 @RequestMapping("/api")
-public class AccountRestController {
+public class BankAccountRestController {
 
     private BankAccountRepository bankAccountRepository;
 
@@ -24,7 +24,7 @@ public class AccountRestController {
     private AccountMapper accountMapper;
 
 
-    public AccountRestController(BankAccountRepository bankAccountRepository, AccountService accountService, AccountMapper accountMapper) {
+    public BankAccountRestController(BankAccountRepository bankAccountRepository, AccountService accountService, AccountMapper accountMapper) {
         this.bankAccountRepository = bankAccountRepository;
         this.accountService = accountService;
         this.accountMapper = accountMapper;
@@ -73,5 +73,3 @@ public class AccountRestController {
 
 }
 
-
-//min: 37
